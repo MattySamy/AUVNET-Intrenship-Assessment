@@ -66,6 +66,10 @@ npm run start:prod
 
 [Postman Collection](https://interstellar-flare-148518.postman.co/workspace/Team-Workspace~4ba745de-4647-4ad5-893b-ad5d80170703/collection/23532006-6a4b2bbe-6ed9-44be-aa6b-1ac38135cb40?action=share&creator=23532006&active-environment=23532006-23e73f70-0d0f-4e96-85a2-299957ecbf7d)
 
-## Entity Relationship Diagram
+## SQL Entity Relationship Diagram
 
-![ERD](ERD.png)
+![SQL_ERD](SQL_ERD.png)
+
+## NoSQL Entity Relationship Diagram
+
+![NoSQL_ERD](NoSQL_ERD.png)
