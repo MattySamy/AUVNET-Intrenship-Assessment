@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Product Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .form-group button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-group button:disabled {
+        background-color: #cccccc;
+      }
+      .product-list {
+        margin-top: 20px;
+      }
+      .product-list li {
+        list-style: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="/">Home</a>
+      <a href="./product.html">Product</a>
+      <a href="./category.html">Category</a>
+      <a href="./user.html">User</a>
+      <a
+        id="logoutBtn"
+        onclick="logout()"
+        style="display: none; cursor: pointer"
+        >Logout</a
+      >
+    </div>
+    <div class="container">
+      <h1>Product Management</h1>
+
+      <div class="form-group" id="productForm">
+        <label for="title">Product Name</label>
+        <input id="title" name="title" required type="text" />
+        <label for="description">Description</label>
+        <input id="description" name="description" required type="text" />
+        <label for="price">Price</label>
+        <input id="price" name="price" required type="number" />
+        <label for="quantity">Quantity</label>
+        <input id="quantity" name="quantity" required type="number" />
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="">Select Category</option>
+        </select>
+        <button id="createProductBtn" style="margin-top: 20px">
+          Create Product
+        </button>
+      </div>
+      <hr />
+      <div class="form-group" id="productUpdateForm" style="display: none">
+        <label for="updateTitle">Update Product Name</label>
+        <input id="updateTitle" name="title" required type="text" />
+        <label for="updateDescription">Update Description</label>
+        <input id="updateDescription" name="description" required type="text" />
+        <label for="updatePrice">Update Price</label>
+        <input id="updatePrice" name="price" required type="number" />
+        <label for="updateQuantity">Update Quantity</label>
+        <input id="updateQuantity" name="quantity" required type="number" />
+        <label for="updateCategory">Update Category</label>
+        <select id="updateCategory" name="category" required>
+          <option value="">Select Category</option>
+        </select>
+        <button id="updateProductBtn" style="margin-top: 20px">
+          Update Product
+        </button>
+      </div>
+      <ul class="product-list" id="productList"></ul>
+      <h3>Wishlist</h3>
+      <h5 id="wishlistCount"></h5>
+      <button id="loadWishlistBtn">Load Wishlist</button>
+      <ul class="product-list" id="wishlist"></ul>
+      <hr />
+    </div>
+    <script src="./js/product.js"></script>
+  </body>
+</html>

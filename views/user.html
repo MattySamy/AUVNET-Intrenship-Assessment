@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>User Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .form-group button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-group button:disabled {
+        background-color: #cccccc;
+      }
+      .user-list {
+        margin-top: 20px;
+      }
+      .user-list li {
+        list-style: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="/">Home</a>
+      <a href="./product.html">Product</a>
+      <a href="./category.html">Category</a>
+      <a href="./user.html">User</a>
+      <a
+        id="logoutBtn"
+        onclick="logout()"
+        style="display: none; cursor: pointer"
+        >Logout</a
+      >
+    </div>
+    <div class="container">
+      <h1>User Management</h1>
+
+      <div class="form-group" id="signupForm">
+        <h2>Sign Up</h2>
+        <label for="signupEmail">Email</label>
+        <input id="signupEmail" required type="email" />
+        <label for="signupPassword">Password</label>
+        <input id="signupPassword" required type="password" />
+        <label for="signupUsername">Username</label>
+        <input id="signupUsername" required type="text" />
+        <label for="passwordConfirm">Confirm Password</label>
+        <input
+          id="passwordConfirm"
+          name="passwordConfirm"
+          required
+          type="password"
+        />
+        <button id="signupBtn">Sign Up</button>
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div class="form-group" id="loginForm">
+        <h2>Login</h2>
+        <label for="loginUsername">Username</label>
+        <input id="loginUsername" name="username" required type="text" />
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" name="password" required type="password" />
+        <button id="loginBtn">Login</button>
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div class="form-group">
+        <label for="limit">Limit</label>
+        <input id="limit" type="number" value="2" />
+        <button id="loadUsersBtn">Get Users</button>
+      </div>
+      <ul class="user-list" id="userList"></ul>
+      <br />
+      <hr />
+      <br />
+      <div class="form-group">
+        <label for="limit">Limit</label>
+        <input id="limitAdmin" type="number" value="2" />
+        <button id="loadAdminsBtn">Get Admins</button>
+      </div>
+      <ul class="user-list" id="adminList"></ul>
+      <br />
+      <hr />
+      <br />
+      <h2>Create User</h2>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="createUsername" name="username" required type="text" />
+        <label for="email">Email</label>
+        <input id="createEmail" name="email" required type="email" />
+        <label for="password">Password</label>
+        <input id="createPassword" name="password" required type="password" />
+        <label for="passwordConfirm">Confirm Password</label>
+        <input
+          id="createConfirmPassword"
+          name="passwordConfirm"
+          required
+          type="password"
+        />
+        <label for="role">Role</label>
+        <select id="createRole">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button id="createUserBtn">Create User</button>
+      </div>
+      <br />
+      <hr />
+      <br />
+    </div>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

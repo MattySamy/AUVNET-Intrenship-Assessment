@@ -118,6 +118,8 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   // 6) send response to client side
   res.status(201).json({
+    status: "success",
+    refreshToken,
     "Welcome Message": `Welcome back, ${user.username}`,
     "JWT Token": token,
     "Your Data": user,

@@ -9,7 +9,6 @@ const UserModel = require("../models/user.model");
 
 exports.addProductToWishlist = asyncHandler(async (req, res, next) => {
   // $addToSet:=> add productId to wishlist array if it doesn't exist
-
   const user = await UserModel.findByIdAndUpdate(
     req.user._id,
     {
@@ -21,6 +20,15 @@ exports.addProductToWishlist = asyncHandler(async (req, res, next) => {
       new: true,
     }
   );
+
+  if (!user) {
+    return next(
+      new ApiError(
+        `Product with ID: ${req.params.productId} not found for user: ${req.user._id}`,
+        404
+      )
+    );
+  }
 
   res.status(200).json({
     status: "success",
@@ -46,6 +54,15 @@ exports.rmProductFromWishlist = asyncHandler(async (req, res, next) => {
       new: true,
     }
   );
+
+  if (!user) {
+    return next(
+      new ApiError(
+        `Product with ID: ${req.params.productId} not found for user: ${req.user._id}`,
+        404
+      )
+    );
+  }
 
   res.status(200).json({
     status: "success",

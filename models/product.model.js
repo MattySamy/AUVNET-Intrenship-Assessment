@@ -39,7 +39,6 @@ const productSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "Product must belong to a specific user"],
     },
   },
   {

@@ -56,8 +56,7 @@ exports.createProductValidator = [
       return true;
     }),
   check("user")
-    .notEmpty()
-    .withMessage("Product must be related to a specific user !!")
+    .optional()
     .isMongoId()
     .withMessage("Invalid User id format !!")
     .custom(async (userId, { req }) => {

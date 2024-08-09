@@ -1,4 +1,4 @@
-const { body, check } = require("express-validator");
+const { check } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorErrorHandling.middleware");
 const ProductModel = require("../../models/product.model");
 
@@ -12,7 +12,7 @@ exports.addProductsToWishlistValidator = [
       if (!product) {
         throw new Error(`There is no product with id ${val}`);
       }
-      if (req.user.wishList.includes(val)) {
+      if (req.user.wishList.find((product) => product._id == val)) {
         throw new Error(`Product with id ${val} already added to wishlist !!`);
       }
       return true;
@@ -30,7 +30,7 @@ exports.rmProductsFromWishlistValidator = [
       if (!product) {
         throw new Error(`There is no product with id ${val}`);
       }
-      if (!req.user.wishList.includes(val)) {
+      if (!req.user.wishList.find((product) => product._id == val)) {
         throw new Error(
           `Product with id ${val} already not found in wishlist !!`
         );

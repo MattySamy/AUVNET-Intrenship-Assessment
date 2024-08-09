@@ -12,22 +12,6 @@ class CategoryIterator {
     }
     return subCategories;
   }
-
-  getSubSubCategories() {
-    const subSubCategories = [];
-    for (
-      let i = 0;
-      i <
-      this.category.subcategories[this.subcategoryIndex].subSubcategories
-        .length;
-      i++
-    ) {
-      subSubCategories.push(
-        this.category.subcategories[this.subcategoryIndex].subSubcategories[i]
-      );
-    }
-    return subSubCategories;
-  }
 }
 
 module.exports = CategoryIterator;

@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cookieparser = require("cookie-parser");
+const cors = require("cors");
 
 require("dotenv").config({ path: "./config.env" });
 
@@ -25,6 +26,15 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
   console.log(`node: ${process.env.NODE_ENV}`);
 }
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -66,7 +76,9 @@ async function startServer() {
       process.exit(1);
     });
   app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT} on http://localhost:${PORT}`);
+    console.log(
+      `Server started on port ${PORT} on http://localhost:${PORT}/api/v1/`
+    );
   });
 }
 

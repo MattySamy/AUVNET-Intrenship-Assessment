@@ -12,6 +12,7 @@ exports.getCategoryValidator = [
 exports.createCategoryValidator = [
   check("name")
     .notEmpty()
+    .withMessage("Category name is required !!")
     .isLength({ min: 3 })
     .withMessage("Too short category name !!")
     .isLength({ max: 32 })
@@ -74,6 +75,33 @@ exports.getSubCategoriesValidator = [
       const category = await CategoryModel.findById(val);
       if (!category) {
         throw new Error(`There is no category with id ${val}`);
+      }
+      return true;
+    }),
+  validatorMiddleware,
+];
+
+exports.getSubCategoryValidator = [
+  check("categoryId")
+    .isMongoId()
+    .withMessage("Invalid category id format !!")
+    .custom(async (val) => {
+      const category = await CategoryModel.findById(val);
+      if (!category) {
+        throw new Error(`There is no category with id ${val}`);
+      }
+      return true;
+    }),
+  check("subCategoryId")
+    .isMongoId()
+    .withMessage("Invalid subcategory id format !!")
+    .custom(async (val, { req }) => {
+      const category = await CategoryModel.findById(req.params.categoryId);
+      const subcategory = await category.subcategories.id(val);
+      if (!subcategory) {
+        throw new Error(
+          `There is no subcategory with id ${val} in category ${req.params.categoryId}`
+        );
       }
       return true;
     }),
@@ -199,6 +227,48 @@ exports.createSubSubCategoryValidator = [
   validatorMiddleware,
 ];
 
+exports.getSubSubCategoryValidator = [
+  check("categoryId")
+    .isMongoId()
+    .withMessage("Invalid category id format !!")
+    .custom(async (val) => {
+      const category = await CategoryModel.findById(val);
+      if (!category) {
+        throw new Error(`There is no category with id ${val}`);
+      }
+      return true;
+    }),
+  check("subCategoryId")
+    .isMongoId()
+    .withMessage("Invalid subcategory id format !!")
+    .custom(async (val, { req }) => {
+      const category = await CategoryModel.findById(req.params.categoryId);
+      const subcategory = await category.subcategories.id(val);
+      if (!subcategory) {
+        throw new Error(
+          `There is no subcategory with id ${val} in category ${req.params.categoryId}`
+        );
+      }
+      return true;
+    }),
+  check("subSubCategoryId")
+    .isMongoId()
+    .withMessage("Invalid subsubcategory id format !!")
+    .custom(async (val, { req }) => {
+      const category = await CategoryModel.findById(req.params.categoryId);
+      const subcategory = await category.subcategories
+        .id(req.params.subCategoryId)
+        .subSubcategories.id(val);
+      if (!subcategory) {
+        throw new Error(
+          `There is no subsubcategory with id ${val} in subcategory ${req.params.subCategoryId} in category ${req.params.categoryId}`
+        );
+      }
+      return true;
+    }),
+  validatorMiddleware,
+];
+
 exports.updateSubSubCategoryValidator = [
   check("categoryId")
     .isMongoId()
@@ -223,7 +293,7 @@ exports.updateSubSubCategoryValidator = [
       }
       return true;
     }),
-  check("subSubcategoryId")
+  check("subSubCategoryId")
     .isMongoId()
     .withMessage("Invalid subsubcategory id format !!")
     .custom(async (val, { req }) => {
@@ -239,6 +309,8 @@ exports.updateSubSubCategoryValidator = [
       }
       return true;
     }),
+  check("name").optional(),
+  validatorMiddleware,
 ];
 
 exports.deleteSubSubCategoryValidator = [
@@ -267,7 +339,7 @@ exports.deleteSubSubCategoryValidator = [
       return true;
     }),
 
-  check("subSubcategoryId")
+  check("subSubCategoryId")
     .isMongoId()
     .withMessage("Invalid subsubcategory id format !!")
     .custom(async (val, { req }) => {
@@ -283,4 +355,6 @@ exports.deleteSubSubCategoryValidator = [
       }
       return true;
     }),
+
+  validatorMiddleware,
 ];

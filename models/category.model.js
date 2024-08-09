@@ -16,15 +16,4 @@ const categorySchema = new mongoose.Schema({
   ],
 });
 
-// No need to populate subcategories
-// categorySchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: "subcategories",
-//     populate: {
-//       path: "subSubcategories",
-//     },
-//   });
-//   next();
-// });
-
 module.exports = mongoose.model("Category", categorySchema);

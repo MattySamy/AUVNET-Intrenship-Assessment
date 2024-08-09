@@ -15,7 +15,11 @@ const userSchema = new mongoose.Schema(
       { type: mongoose.Schema.Types.ObjectId, ref: "Product", default: [] },
     ],
     products: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Product", default: [] },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        default: [],
+      },
     ],
     password: {
       type: String,

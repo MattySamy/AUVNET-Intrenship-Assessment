@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Category Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .form-group button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-group button:disabled {
+        background-color: #cccccc;
+      }
+      .category-list {
+        margin-top: 20px;
+      }
+      .category-list li {
+        list-style: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="/">Home</a>
+      <a href="./product.html">Product</a>
+      <a href="./category.html">Category</a>
+      <a href="./user.html">User</a>
+      <a
+        id="logoutBtn"
+        onclick="logout()"
+        style="display: none; cursor: pointer"
+        >Logout</a
+      >
+    </div>
+    <div class="container">
+      <h1>Category Management</h1>
+
+      <div class="form-group" id="categoryForm">
+        <label for="categoryName">Category Name</label>
+        <input id="categoryName" name="name" required type="text" />
+        <label for="categoryType">Category Type</label>
+        <input id="categoryType" name="type" type="text" />
+        <button id="createCategoryBtn" style="margin-top: 10px">
+          Create Category
+        </button>
+      </div>
+
+      <div class="form-group" id="categoryUpdateForm" style="display: none">
+        <label for="updateCategoryName">Update Category Name</label>
+        <input id="updateCategoryName" name="name" required type="text" />
+        <label for="updateCategoryType">Update Category Type</label>
+        <input id="updateCategoryType" name="type" type="text" />
+        <button id="updateCategoryBtn" style="margin-top: 10px">
+          Update Category
+        </button>
+      </div>
+      <hr />
+      <h2>Category List</h2>
+      <div class="form-group">
+        <button id="loadCategoriesBtn" class="form-group">
+          Get Categories
+        </button>
+        <ul class="category-list" id="categoryList"></ul>
+      </div>
+      <!-- Subcategories Management -->
+      <div id="subcategoriesSection" class="form-group" style="display: none">
+        <h2>Subcategories</h2>
+        <ul class="category-list" id="subcategoriesList"></ul>
+        <hr />
+        <div id="subCategoryForm">
+          <label for="subCategoryName">Subcategory Name</label>
+          <input id="subCategoryName" name="name" required type="text" />
+          <button id="addSubcategoryBtn" style="margin-top: 10px">
+            Add Subcategory
+          </button>
+        </div>
+        <div id="subCategoryUpdateForm" style="display: none">
+          <label for="updateSubcategoryName">Update Subcategory Name</label>
+          <input id="updateSubcategoryName" name="name" required type="text" />
+          <button id="updateSubcategoryBtn" style="margin-top: 10px">
+            Update Subcategory
+          </button>
+        </div>
+      </div>
+
+      <!-- SubSubCategories Management -->
+      <div
+        id="subSubcategoriesSection"
+        class="form-group"
+        style="display: none"
+      >
+        <h2>SubSubCategories</h2>
+        <ul class="category-list" id="subSubcategoriesList"></ul>
+        <hr />
+        <div id="subSubcategoryForm">
+          <label for="subSubCategoryName">SubSubCategory Name</label>
+          <input id="subSubCategoryName" name="name" required type="text" />
+          <button id="addSubSubcategoryBtn">Add SubSubCategory</button>
+        </div>
+        <div id="subSubcategoryUpdateForm" style="display: none">
+          <label for="updateSubSubcategoryName"
+            >Update SubSubCategory Name</label
+          >
+          <input
+            id="updatesubSubcategoryName"
+            name="name"
+            required
+            type="text"
+          />
+          <button id="updateSubSubcategoryBtn" style="margin-top: 10px">
+            Update SubSubCategory
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./js/category.js"></script>
+  </body>
+</html>
