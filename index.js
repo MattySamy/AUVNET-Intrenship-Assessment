@@ -41,8 +41,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(createAdmin);
-
 // for handling refresh tokens
 app.use(cookieparser());
 
@@ -79,6 +77,8 @@ async function startServer() {
       console.error("Database connection error: ", err);
       process.exit(1);
     });
+
+  await createAdmin();
   app.listen(PORT, () => {
     console.log(
       `Server started on port ${PORT} on http://localhost:${PORT}/api/v1/`

@@ -1,5 +1,5 @@
 const UserModel = require("../models/user.model");
-exports.createAdmin = async (req, res, next) => {
+exports.createAdmin = async () => {
   // Check if admin exists and create one if not
   const adminExists = await UserModel.findOne({
     username: "admin",
@@ -15,5 +15,4 @@ exports.createAdmin = async (req, res, next) => {
       .then(() => console.log("Admin created successfully by default !!"))
       .catch((err) => console.log(err));
   }
-  next();
 };
