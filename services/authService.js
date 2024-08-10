@@ -4,6 +4,7 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { createAdmin } = require("../config/automaticAdminCreation");
 
 const { ApiError } = require("../utils/errorHandler");
 const UserModel = require("../models/user.model");
@@ -15,17 +16,6 @@ const { generateToken } = require("../utils/generateToken");
 
 exports.signUp = (...roles) =>
   asyncHandler(async (req, res, next) => {
-    // Check if admin exists and create one if not
-    const adminExists = await UserModel.findOne({ role: "admin" });
-    if (!adminExists) {
-      await UserModel.create({
-        username: "admin",
-        email: "admin@gmail.com",
-        password: "admin",
-        role: "admin",
-      }).then(() => console.log("Admin created successfully by default !!"));
-    }
-
     // 1) Create user
     let user = UserModel.create({
       username: req.body.username,

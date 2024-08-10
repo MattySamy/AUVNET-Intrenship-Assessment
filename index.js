@@ -11,6 +11,8 @@ const { globalErrorHandler } = require("./middlewares/error.middleware");
 
 const { mongoConnect } = require("./config/mongoConnection");
 
+const { createAdmin } = require("./config/automaticAdminCreation");
+
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const categoryRoute = require("./routes/category.route");
@@ -38,6 +40,8 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(createAdmin);
 
 // for handling refresh tokens
 app.use(cookieparser());
