@@ -26,7 +26,7 @@ exports.deleteOne = (Model) =>
       }
     }
     const { id } = req.params;
-    let model = await Model.findByIdAndDelete(id);
+    let model = await Model.findById(id);
     if (!model) {
       return next(
         new ApiError(`${Model.modelName} not found for id: ${id}`, 404)
@@ -34,7 +34,7 @@ exports.deleteOne = (Model) =>
     }
 
     // Trigger "remove" event launched by mongoose middleware (deprecated for mongoose@6)
-    model.deleteOne();
+    await model.deleteOne();
 
     res.status(200).json({
       status: "success",

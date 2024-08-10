@@ -64,14 +64,22 @@ productSchema.post("save", async function (doc, next) {
   }
 });
 
-productSchema.post("remove", async function (doc, next) {
-  try {
-    if (doc.user)
-      await User.findByIdAndUpdate(doc.user, { $pull: { products: doc._id } });
-    next();
-  } catch (error) {
-    next(error);
+productSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    try {
+      const doc = this; // 'this' refers to the document in this context
+      if (doc.user) {
+        await User.findByIdAndUpdate(doc.user, {
+          $pull: { products: doc._id },
+        });
+      }
+      next();
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = mongoose.model("Product", productSchema);
