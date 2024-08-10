@@ -28,25 +28,19 @@ npm install
 
 To run this project, you will need to add the following environment variables to your `config.env` file
 
-`PORT=5000`
+`PORT=Your Desired PORT Number`
 
 `NODE_ENV=development`
 
-`DB_USER=mostafasamy`
+`DB_URI=mongodb+srv://<Your Username>:<Your Password>@cluster0.ws2xxnq.mongodb.net/<Your DB name>?retryWrites=true&w=majority`
 
-`DB_PASSWORD=2002`
+`JWT_EXPIRES_IN=Duration in format ("nm => minutes","ns => seconds","ny" => year,"nd" => days)`
 
-`DB_NAME=AUVNET`
+`JWT_REFRESH_EXPIRES_IN=Duration in format ("nm => minutes","ns => seconds","ny" => year,"nd" => days)`
 
-`DB_URI=mongodb+srv://mostafasamy:2002@cluster0.ws2xxnq.mongodb.net/AUVNET?retryWrites=true&w=majority`
+`JWT_SECRET_KEY=Random Secret Key`
 
-`JWT_EXPIRES_IN=5m`
-
-`JWT_REFRESH_EXPIRES_IN=1d`
-
-`JWT_SECRET_KEY=Mostafa@2002In2024is22yearsold`
-
-`JWT_REFRESH_SECRET_KEY=Mostafa@2002AndGraduatedAt2024Hooray!`
+`JWT_REFRESH_SECRET_KEY=Random Secret Key`
 
 ## Usage
 
