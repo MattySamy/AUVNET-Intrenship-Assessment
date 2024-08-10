@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("updateCategoryBtn")
     .addEventListener("click", updateCategory);
   if (localStorage.getItem("token")) {
-    document.getElementById("logoutBtn").style.display = "block";
+    document.getElementById("logoutBtn").style.display = "inline-block";
   }
 });
 

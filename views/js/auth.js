@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("loadAdminsBtn")
     .addEventListener("click", loadAdmins);
   if (localStorage.getItem("token")) {
-    document.getElementById("logoutBtn").style.display = "block";
+    document.getElementById("logoutBtn").style.display = "inline-block";
   }
 });
 

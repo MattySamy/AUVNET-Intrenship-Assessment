@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("loadWishlistBtn")
     .addEventListener("click", loadWishlist);
   if (localStorage.getItem("token")) {
-    document.getElementById("logoutBtn").style.display = "block";
+    document.getElementById("logoutBtn").style.display = "inline-block";
   }
 });
 
