@@ -57,16 +57,23 @@ async function login() {
 
   const data = await response.json();
   if (data.status === "success") {
-    localStorage.setItem("token", data["JWT Token"]);
-    localStorage.setItem("refreshToken", data.refreshToken);
-    alert("Login successful");
-    loadUsers();
-    loadAdmins();
-    window.location.reload();
+    if (localStorage.getItem("token")) {
+      alert("Already logged in");
+      loadUsers();
+      loadAdmins();
+      window.location.reload();
+    } else {
+      localStorage.setItem("token", data["JWT Token"]);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      alert("Login successful");
+      loadUsers();
+      loadAdmins();
+      window.location.reload();
+    }
   } else {
     alert(
-      "Login failed: " + data["Welcome Message"]
-        ? data["Welcome Message"]
+      "Login failed: " + data["Error Message"]
+        ? data["Error Message"]
         : data["Array of errors about validation"][0]["msg"]
     );
   }
