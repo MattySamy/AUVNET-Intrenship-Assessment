@@ -1,10 +1,30 @@
 const asyncHandler = require("express-async-handler");
 const { ApiError } = require("../utils/errorHandler");
 const ApiPagination = require("../utils/apiPagination");
-const { findOne } = require("../models/user.model");
+const Category = require("../models/category.model");
 
 exports.deleteOne = (Model) =>
   asyncHandler(async (req, res, next) => {
+    //
+    if (Model.modelName === "Product") {
+      const categories = await Category.find().select("_id"); // Fetch all categories and select only the _id field
+      const categoryIds = categories.map((category) => category._id.toString()); // Extract the _id values as strings
+
+      const products = await Model.find(); // Fetch all products
+
+      for (const product of products) {
+        if (
+          !product.category ||
+          !categoryIds.includes(product.category._id.toString())
+        ) {
+          // If the category is null or does not exist in the category list
+          await Model.deleteOne({ _id: product._id }); // Delete the product
+          console.log(
+            `Deleted product with _id: ${product._id} and category: ${product.category}`
+          );
+        }
+      }
+    }
     const { id } = req.params;
     let model = await Model.findByIdAndDelete(id);
     if (!model) {
@@ -25,6 +45,25 @@ exports.deleteOne = (Model) =>
 // eslint-disable-next-line default-param-last
 exports.updateOne = (Model) =>
   asyncHandler(async (req, res, next) => {
+    if (Model.modelName === "Product") {
+      const categories = await Category.find().select("_id"); // Fetch all categories and select only the _id field
+      const categoryIds = categories.map((category) => category._id.toString()); // Extract the _id values as strings
+
+      const products = await Model.find(); // Fetch all products
+
+      for (const product of products) {
+        if (
+          !product.category ||
+          !categoryIds.includes(product.category._id.toString())
+        ) {
+          // If the category is null or does not exist in the category list
+          await Model.deleteOne({ _id: product._id }); // Delete the product
+          console.log(
+            `Deleted product with _id: ${product._id} and category: ${product.category}`
+          );
+        }
+      }
+    }
     // Update model
     const model = await Model.findByIdAndUpdate(
       req.params.id,
@@ -60,6 +99,25 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, populateOptions = null) =>
   asyncHandler(async (req, res, next) => {
+    if (Model.modelName === "Product") {
+      const categories = await Category.find().select("_id"); // Fetch all categories and select only the _id field
+      const categoryIds = categories.map((category) => category._id.toString()); // Extract the _id values as strings
+
+      const products = await Model.find(); // Fetch all products
+
+      for (const product of products) {
+        if (
+          !product.category ||
+          !categoryIds.includes(product.category._id.toString())
+        ) {
+          // If the category is null or does not exist in the category list
+          await Model.deleteOne({ _id: product._id }); // Delete the product
+          console.log(
+            `Deleted product with _id: ${product._id} and category: ${product.category}`
+          );
+        }
+      }
+    }
     const { id } = req.params;
 
     // Build Query
@@ -84,19 +142,25 @@ exports.getOne = (Model, populateOptions = null) =>
 
 exports.getAll = (Model) =>
   asyncHandler(async (req, res) => {
-    // if (Model.modelName === "Product") {
-    //   let result = Model.deleteMany({
-    //     category: null,
-    //   });
+    if (Model.modelName === "Product") {
+      const categories = await Category.find().select("_id"); // Fetch all categories and select only the _id field
+      const categoryIds = categories.map((category) => category._id.toString()); // Extract the _id values as strings
 
-    //   result = await result;
+      const products = await Model.find(); // Fetch all products
 
-    //   if (result.deletedCount > 0) {
-    //     console.log(
-    //       `Deleted ${result.deletedCount} products with category: null`
-    //     );
-    //   }
-    // }
+      for (const product of products) {
+        if (
+          !product.category ||
+          !categoryIds.includes(product.category._id.toString())
+        ) {
+          // If the category is null or does not exist in the category list
+          await Model.deleteOne({ _id: product._id }); // Delete the product
+          console.log(
+            `Deleted product with _id: ${product._id} and category: ${product.category}`
+          );
+        }
+      }
+    }
 
     // Build Query
     const countDocuments = await Model.countDocuments();
