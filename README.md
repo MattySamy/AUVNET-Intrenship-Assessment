@@ -66,7 +66,7 @@ Please Run Every View Particularly or by navigator in any view u run and don't f
 
 #### And Here it's my API Collection (with deployed server).
 
-[Postman Collection](https://interstellar-flare-148518.postman.co/workspace/Team-Workspace~4ba745de-4647-4ad5-893b-ad5d80170703/collection/23532006-6a4b2bbe-6ed9-44be-aa6b-1ac38135cb40?action=share&creator=23532006&active-environment=23532006-23e73f70-0d0f-4e96-85a2-299957ecbf7d)
+[Postman Collection](https://interstellar-flare-148518.postman.co/workspace/Public~f915e17b-a9c3-4eea-b3cf-3c8afaa19115/collection/23532006-6a4b2bbe-6ed9-44be-aa6b-1ac38135cb40?active-environment=23532006-aa22feec-ec64-441b-8bed-55755d56ac8f)
 
 ## SQL Entity Relationship Diagram
 

@@ -1,0 +1,1184 @@
+{
+  "info": {
+    "_postman_id": "6a4b2bbe-6ed9-44be-aa6b-1ac38135cb40",
+    "name": "Task",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23532006",
+    "_collection_link": "https://interstellar-flare-148518.postman.co/workspace/Public~f915e17b-a9c3-4eea-b3cf-3c8afaa19115/collection/23532006-6a4b2bbe-6ed9-44be-aa6b-1ac38135cb40?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign Up",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"jwt\", pm.response.json().token);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"Mostafa Samy\",\r\n    \"email\":\"mostafasamysfsf1@hotmail.com\",\r\n    \"password\":\"Mostafa@2002\",\r\n    \"passwordConfirm\":\"Mostafa@2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/auth/signup",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Log In",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Fixed the ReferenceError by defining the token variable\r",
+                  "pm.environment.set(\"JWT\", pm.response.json()[\"JWT Token\"]);\r",
+                  "pm.environment.set(\"refreshToken\", pm.response.json().refreshToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"mostafasamysfsf1@hotmail.com\",\r\n    \"password\":\"Mostafa@2002\"\r\n    // \"username\":\"admin\",\r\n    // \"password\":\"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/auth/login",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Fixed the ReferenceError by defining the token variable\r",
+                  "pm.environment.set(\"JWT\", pm.response.json()[\"New Access Token\"]);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/auth/refresh",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "auth", "refresh"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Log Out",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"mostafasamysfsf@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/auth/logout",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "auth", "logout"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users (Access: Admin)",
+      "item": [
+        {
+          "name": "Get users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/users",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get admins",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/users/admins",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "users", "admins"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create admin",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"Sony\",\r\n    \"email\":\"mattysamy@gmail.com\",\r\n    \"password\":\"Mostafa@2002\",\r\n    \"passwordConfirm\":\"Mostafa@2002\",\r\n    \"role\":\"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/users/admins",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "users", "admins"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/users/66b518a4543cf16b43e41fb3",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "users", "66b518a4543cf16b43e41fb3"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update specific admin",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Girls Clothes\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/users/admins/668bfbbf1168673062b9d8bc",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "admins",
+                "668bfbbf1168673062b9d8bc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete specific user or admin",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/users/66b518a4543cf16b43e41fb3",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "users", "66b518a4543cf16b43e41fb3"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change User Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\":\"Pere@123488\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/users/changePassword/6696f44174e613401e4bdbe5",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "changePassword",
+                "6696f44174e613401e4bdbe5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "get categories",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get category by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/categories/668462f8ce2155f44b915e",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "categories", "668462f8ce2155f44b915e"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njk5NDYwZTY0MWEwZjk2M2M3M2E3ODEiLCJpYXQiOjE3MjEzMjEyNDgsImV4cCI6MTcyMTMyMTMzOH0.Z2dFs976coFmfx1s05V22aN9UBooXmzLwj8rpx_51Gc",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Electronics V2\",\r\n  \"type\":\"A\",\r\n  \"subcategories\": [\r\n    {\r\n      \"name\": \"Mobile Phones\",\r\n      \"subSubcategories\": [\r\n        {\r\n          \"name\": \"Smartphones\"\r\n        },\r\n        {\r\n          \"name\": \"Feature Phones\"\r\n        },\r\n        {\r\n            \"name\":\"High Phones\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Electronics\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/668aacce8d6a0f627ad2f7ba",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "categories", "668aacce8d6a0f627ad2f7ba"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b7a93cb8981f38df68c3fc",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "categories", "66b7a93cb8981f38df68c3fc"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get subcategories for specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b6193b0e32cf2eca9e3e33/level2",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b6193b0e32cf2eca9e3e33",
+                "level2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get subcategory for specific category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Laptops\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b6193b0e32cf2eca9e3e33/level2/66b6193b0e32cf2eca9e3e37",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b6193b0e32cf2eca9e3e33",
+                "level2",
+                "66b6193b0e32cf2eca9e3e37"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post subcategories for specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update subcategory for specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Laptops\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2/66b3521bca08d7959f9fa452",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2",
+                "66b3521bca08d7959f9fa452"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete subcategory for specific category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Laptops\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2/66b36371b95a29389df3cab1",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2",
+                "66b36371b95a29389df3cab1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get subSubCategories for specific subcategory",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b6193b0e32cf2eca9e3e33/level2/66b6193b0e32cf2eca9e3e37/level3",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b6193b0e32cf2eca9e3e33",
+                "level2",
+                "66b6193b0e32cf2eca9e3e37",
+                "level3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get subSubCategory for specific subcategory",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b6193b0e32cf2eca9e3e33/level2/66b6193b0e32cf2eca9e3e37/level3/66b6193b0e32cf2eca9e3e38",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b6193b0e32cf2eca9e3e33",
+                "level2",
+                "66b6193b0e32cf2eca9e3e37",
+                "level3",
+                "66b6193b0e32cf2eca9e3e38"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post subSubCategories for specific subcategory",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Universal Cook\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2/66b36cfcd6f0ca9419659083/level3",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2",
+                "66b36cfcd6f0ca9419659083",
+                "level3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update subSubCategory for specific subcategory",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Universal Cook\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2/66b36cfcd6f0ca9419659083/level3/66b36d34d6f0ca941965908f",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2",
+                "66b36cfcd6f0ca9419659083",
+                "level3",
+                "66b36d34d6f0ca941965908f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete subSubCategory for specific subcategory",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Universal Cook\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/categories/66b3521bca08d7959f9fa451/level2/66b36cfcd6f0ca9419659083/level3/66b36d34d6f0ca941965908f",
+              "host": ["{{url}}"],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "66b3521bca08d7959f9fa451",
+                "level2",
+                "66b36cfcd6f0ca9419659083",
+                "level3",
+                "66b36d34d6f0ca941965908f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get products",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/products?page=1&limit=2",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "products"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops\",\r\n    \"slug\": \"fjallraven-foldsack-no.-1-backpack-fits-15-laptops\",\r\n    \"quantity\": 10,\r\n    \"sold\": 5,\r\n    \"price\": 109.95,\r\n    \"description\": \"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday\",\r\n    \"category\": \"66b7b85459d8110a6c387873\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/products",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get product by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/products/66b519ea83dea8d7dc48582b",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "products", "66b519ea83dea8d7dc48582b"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update specific product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"Cool\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/products/66b519ea83dea8d7dc48582b",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "products", "66b519ea83dea8d7dc48582b"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete specific product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/products/66b7c066f5a33fee71203d19",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "products", "66b7c066f5a33fee71203d19"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wishlist",
+      "item": [
+        {
+          "name": "Add product to wishlist for specific user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/v1/wishlist/668edabb0f760db754a7f699",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "wishlist", "668edabb0f760db754a7f699"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove product from wishlist for specific user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/wishlist/668edabb0f760db754a7f699",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "wishlist", "668edabb0f760db754a7f699"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Logged User Wishlist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{JWT}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/v1/wishlist",
+              "host": ["{{url}}"],
+              "path": ["api", "v1", "wishlist"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
